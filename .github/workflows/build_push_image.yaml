@@ -66,14 +66,14 @@ jobs:
     - name: Login to LIGHT AWS ECR
       uses: docker/login-action@v3
       with:
+        registry: ${{ secrets.LIGHT_DOCKER_REPOSITORY_URL }}
         username: ${{ secrets.LIGHT_DOCKER_USER }}
         password: ${{ secrets.LIGHT_DOCKER_TOKEN }}
-        registry: ${{ secrets.LIGHT_DOCKER_REPOSITORY_URL }}
-        ecr: false # TODO: fix as this is misleading, set to false to enable use of LIGHT_DOCKER_TOKEN to auth with registry
-
+        
     - name: Build and push docker images
       uses: docker/build-push-action@v4
       with:
         tags: ${{ steps.meta.outputs.tags }}
+        context: .
         push: true
         provenance: false
