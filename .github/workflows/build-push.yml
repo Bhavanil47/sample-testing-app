@@ -74,6 +74,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         tags: ${{ steps.meta.outputs.tags }}
-        context: .
+        file: ./sample-testing-app/Dockerfile
+        context: ./sample-testing-app
         push: true
         provenance: false
